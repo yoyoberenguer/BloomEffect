@@ -41,7 +41,8 @@ Acronyme : bpf (Bright Pass Filter)
 5) Blit all the bpf images on the original pygame surface (input image), use pygame additive 
    blend mode effect.
 ```
-
+Left image with bloom effect 
 ![alt text](https://github.com/yoyoberenguer/bloom/blob/master/image1.png)
 
+Left image with bloom effect
 ![alt text](https://github.com/yoyoberenguer/bloom/blob/master/image2.png)
