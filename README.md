@@ -12,7 +12,7 @@ and high dynamic range rendering to reproduce an imaging artifact of real-world 
 - Pygame 3
 - Cython (C extension for python) 
 - A C compiler for windows (Visual Studio, MinGW etc) install on your system 
-  and linked to your windows environment variable.
+  and linked to your windows environment.
   Note that some adjustment might be needed once a compiler is install on your system, 
   refer to external documentation or tutorial in order to setup this process.
   e.g https://devblogs.microsoft.com/python/unable-to-find-vcvarsall-bat/
