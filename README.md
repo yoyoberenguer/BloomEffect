@@ -10,6 +10,7 @@ and high dynamic range rendering to reproduce an imaging artifact of real-world 
 ## Requirements:
 ```
 - Pygame 3
+- Numpy 
 - Cython (C extension for python) 
 - A C compiler for windows (Visual Studio, MinGW etc) install on your system 
   and linked to your windows environment.
