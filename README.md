@@ -42,7 +42,9 @@ Acronyme : bpf (Bright Pass Filter)
    blend mode effect.
 ```
 Left image with bloom effect 
+
 ![alt text](https://github.com/yoyoberenguer/bloom/blob/master/image1.png)
 
 Left image with bloom effect
+
 ![alt text](https://github.com/yoyoberenguer/bloom/blob/master/image2.png)
