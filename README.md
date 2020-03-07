@@ -73,7 +73,7 @@ Surface   : pygame.Surface to be bloom (compatible 24, 32-bit format)
 threshold : Integer value for the bright pass filter, filter threshold value
 smooth_   : Smooth define the quantity of Gaussian blur5x5 kernel passes that will be 
             applied to all sub-surface (default is 1, vertical & horizontal)
-            Note the Gaussian algorithm are cpu demanding. 4 is plenty smoothing
+            Note the Gaussian algorithm is cpu demanding. 4 is plenty smoothing
 ```
 
 ## Example in python
