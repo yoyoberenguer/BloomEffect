@@ -1,4 +1,3 @@
-
 """
 MIT License
 
@@ -35,13 +34,16 @@ try:
     import numpy
     from numpy import asarray, uint8, float32, zeros, float64
 except ImportError:
-    print("\n<numpy> library is missing on your system."
+    print("\n<numpy> library is missing on yor system."
           "\nTry: \n   C:\\pip install numpy on a window command prompt.")
 
-import bloom
-from bloom import bloom_effect_buffer, bloom_effect_array
+try:
+    import bloom
+    from bloom import bloom_effect_buffer, bloom_effect_array
+except ImportError:
+    print("\nHave you build the project?"
+          "\nC:>python setup_bloom.py build_ext --inplace")
 import timeit
-
 
 im = pygame.image.load("I2.jpg")
 im = pygame.transform.smoothscale(im, (600, 600))
@@ -49,12 +51,11 @@ im = pygame.transform.smoothscale(im, (600, 600))
 w, h = im.get_size()
 screen = pygame.display.set_mode((w, h))
 
-#
-# print(timeit.timeit("bloom_effect_array(im, 255, smooth_=1)",
-#                     "from __main__ import bloom_effect_array, im", number=10) / 10)
-#
-# print(timeit.timeit("bloom_effect_buffer(im, 255, smooth_=1)",
-#                     "from __main__ import bloom_effect_buffer, im", number=10) / 10)
+print(timeit.timeit("bloom_effect_array(im, 255, smooth_=1)",
+                    "from __main__ import bloom_effect_array, im", number=10) / 10)
+
+print(timeit.timeit("bloom_effect_buffer(im, 255, smooth_=1)",
+                    "from __main__ import bloom_effect_buffer, im", number=10) / 10)
 
 i = 0
 j = 255
