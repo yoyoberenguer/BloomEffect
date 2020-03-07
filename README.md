@@ -78,6 +78,11 @@ smooth_   : Smooth define the quantity of Gaussian blur5x5 kernel passes that wi
             applied to all sub-surface (default is 1, vertical & horizontal)
             Note the Gaussian algorithm is cpu demanding. 4 is plenty smoothing
 ```
+Left image with smooth_=1, 
+right image with smooth_=10
+
+![alt text](https://github.com/yoyoberenguer/bloom/blob/master/BLOOM.png)
+
 
 ## Tips
 ```
@@ -155,4 +160,11 @@ Those values are not too bad considering that all the texture processing is done
 entirely by the CPU.
 Soon I will implement a mask method that will improve efficieny of both techniques.
 ```
+
+### Links
+https://learnopengl.com/Advanced-Lighting/Bloom
+
+https://kalogirou.net/2006/05/20/how-to-do-good-bloom-for-hdr-rendering/
+
+https://catlikecoding.com/unity/tutorials/advanced-rendering/bloom/
 
