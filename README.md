@@ -28,13 +28,16 @@ and high dynamic range rendering to reproduce an imaging artifact of real-world 
 ```
 
 ## Method
+
+![alt text](https://github.com/yoyoberenguer/bloom/blob/master/image3.png)
+
 ```
 Acronyme : bpf (Bright Pass Filter)
 
 1)First apply a bright pass filter to the pygame surface(SDL surface) using methods
   bpf24_b_c or bpf32_b_c (adjust the luminence threshold value to get the best filter effect).
   
-2) Downside the newly created bpf image into sub-surface downscale factor x2, x4, x8, x16 using 
+2) Downscale the newly created bpf image into sub-surface factor x2, x4, x8, x16 using 
    pygame transform.scale method. No need to use smoothscale (bilinear filtering method).
   
 3) Apply a Gaussian blur 5x5 filter on each of the downsized bpf images (if variable smooth_ is > 1, 
