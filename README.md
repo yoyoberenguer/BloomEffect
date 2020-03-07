@@ -29,7 +29,7 @@ and high dynamic range rendering to reproduce an imaging artifact of real-world 
 
 ## Method
 
-![alt text](https://github.com/yoyoberenguer/bloom/blob/master/image3.png)
+![alt text](https://github.com/yoyoberenguer/bloom/blob/master/bllom.png)
 
 ```
 Acronyme : bpf (Bright Pass Filter)
