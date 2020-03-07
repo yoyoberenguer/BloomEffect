@@ -81,7 +81,7 @@ smooth_   : Smooth define the quantity of Gaussian blur5x5 kernel passes that wi
 Left image with smooth_=1, 
 right image with smooth_=10
 
-![alt text](https://github.com/yoyoberenguer/bloom/blob/master/BLOOM.png)
+![alt text](https://github.com/yoyoberenguer/bloom/blob/master/image3.png)
 
 
 ## Tips
