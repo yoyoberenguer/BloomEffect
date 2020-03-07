@@ -1,6 +1,15 @@
 # BLOOM
 Bloom Effect using Cython
 
+Left image with bloom effect 
+
+![alt text](https://github.com/yoyoberenguer/bloom/blob/master/image1.png)
+
+Left image with bloom effect
+
+![alt text](https://github.com/yoyoberenguer/bloom/blob/master/image2.png)
+
+
 ## Definition:
 ```
 Bloom effet is a computer graphics effect used in video games, demos,
@@ -124,12 +133,5 @@ texture 600x600 24-bit gives a modest 0.04516 (45ms) processing time
 Those values are not too bad considering that all the texture processing is done 
 entirely by the CPU.
 Soon I will implement a mask method that will improve efficieny of both techniques.
-`
+```
 
-Left image with bloom effect 
-
-![alt text](https://github.com/yoyoberenguer/bloom/blob/master/image1.png)
-
-Left image with bloom effect
-
-![alt text](https://github.com/yoyoberenguer/bloom/blob/master/image2.png)
