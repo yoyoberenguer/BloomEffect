@@ -53,10 +53,10 @@ and a C-compiler are correctly install on your system.
 ```
 ## Two methods
 ```
-# This bloom method is using massively numpy.ndarray to manipulate data.
+# Below bloom method is using massively numpy.ndarray to manipulate data.
 bloom = bloom_effect_array(surface, threshold, smooth_=1)
 
-# This method is using BufferProxy or C-Buffer data structure. 
+# Below method is using BufferProxy or C-Buffer data structure. 
 # It is also the fastest algorithm available.
 bloom = bloom_effect_buffer(surface, threshold, smooth_=1)
 
@@ -105,7 +105,7 @@ while STOP_DEMO:
     j -= 1
     if j < 0:
         j = 255
-'''
+```
 
 ## Timings
 ```
@@ -113,7 +113,18 @@ print(timeit.timeit("bloom_effect_array(im, 255, smooth_=1)",
                     "from __main__ import bloom_effect_array, im", number=10) / 10)
 print(timeit.timeit("bloom_effect_buffer(im, 255, smooth_=1)",
                      "from __main__ import bloom_effect_buffer, im", number=10) / 10)
-```
+Method 1:
+bloom_effect_array 
+texture 600x600 24-bit gives a modest 0.0793 (79ms) processing time
+
+Method 2:
+bloom_effect_buffer
+texture 600x600 24-bit gives a modest 0.04516 (45ms) processing time
+
+Those values are not too bad considering that all the texture processing is done 
+entirely by the CPU.
+Soon I will implement a mask method that will improve efficieny of both techniques.
+`
 
 Left image with bloom effect 
 
