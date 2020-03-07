@@ -76,6 +76,14 @@ smooth_   : Smooth define the quantity of Gaussian blur5x5 kernel passes that wi
             Note the Gaussian algorithm is cpu demanding. 4 is plenty smoothing
 ```
 
+## Tips
+```
+If you get the following error message after execution
+ModuleNotFoundError: No module named 'bloom'
+Refer to the section building the project.
+
+```
+
 ## Example in python
 ```
 
