@@ -130,7 +130,7 @@ while STOP_DEMO:
 ## DEMO version
 ```
 Decompress the archive in the source diretory. 
-In order to work, demo.exe must be under the same directory to i2.jpg 
+In order to work, demo.exe must be under the same directory with i2.jpg 
 Copy/move i2.jpg if necessary to demo.exe location.
 ```
 
