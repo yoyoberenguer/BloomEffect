@@ -78,13 +78,16 @@ smooth_   : Smooth define the quantity of Gaussian blur5x5 kernel passes that wi
 
 ## Tips
 ```
-If you get the following error message after execution
-ModuleNotFoundError: No module named 'bloom'
-Refer to the section building the project.
+C:\Users\user\Downloads\BLOOM-master>python test_bloom.py
+
+If you get the following error message after execution, refer to 
+the section building the project.
+
+<<ModuleNotFoundError: No module named 'bloom'>>
 
 ```
 
-## Example in python
+## Example in python IDE 
 ```
 
 import pygame
