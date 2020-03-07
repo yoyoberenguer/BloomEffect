@@ -1,6 +1,5 @@
 # BLOOM
-Bloom Effect
-IN PROGRESS (will be update very soon)
+Bloom Effect using Cython
 
 ## Definition:
 ```
@@ -42,6 +41,80 @@ Acronyme : bpf (Bright Pass Filter)
 5) Blit all the bpf images on the original pygame surface (input image), use pygame additive 
    blend mode effect.
 ```
+
+## Building the project 
+```
+In a command prompt and under the directory containing the source files
+C:\>python setup_bloom.py build_ext --inplace 
+
+If the compilation fail, refers to the requirement section and make sure cython 
+and a C-compiler are correctly install on your system. 
+
+```
+## Two methods
+```
+# This bloom method is using massively numpy.ndarray to manipulate data.
+bloom = bloom_effect_array(surface, threshold, smooth_=1)
+
+# This method is using BufferProxy or C-Buffer data structure. 
+# It is also the fastest algorithm available.
+bloom = bloom_effect_buffer(surface, threshold, smooth_=1)
+
+Surface   : pygame.Surface to be bloom (compatible 24, 32-bit format) 
+threshold : Integer value for the bright pass filter, filter threshold value
+smooth_   : Smooth define the quantity of Gaussian blur5x5 kernel passes that will be 
+            applied to all sub-surface (default is 1, vertical & horizontal)
+            Note the Gaussian algorithm are cpu demanding. 4 is plenty smoothing
+```
+
+## Example in python
+```
+
+import pygame
+import numpy
+from numpy import asarray, uint8, float32, zeros, float64
+
+#<---  HERE --->
+import bloom
+from bloom import bloom_effect_buffer, bloom_effect_array
+
+im = pygame.image.load("I2.jpg")
+im = pygame.transform.smoothscale(im, (600, 600))
+
+w, h = im.get_size()
+screen = pygame.display.set_mode((w, h))
+
+i = 0
+j = 255
+STOP_DEMO = True
+while STOP_DEMO:
+    pygame.event.pump()
+    keys = pygame.key.get_pressed()
+
+    # screen.fill((10, 10, 10, 255))
+    org = bloom_effect_array(im, j, smooth_=1)
+    screen.blit(org, (0, 0))
+    pygame.display.flip()
+
+    if keys[pygame.K_ESCAPE]:
+        STOP_DEMO = False
+
+    if keys[pygame.K_F8]:
+        pygame.image.save(screen, 'Screendump' + str(i) + '.png')
+    i += 1
+    j -= 1
+    if j < 0:
+        j = 255
+'''
+
+## Timings
+```
+print(timeit.timeit("bloom_effect_array(im, 255, smooth_=1)",
+                    "from __main__ import bloom_effect_array, im", number=10) / 10)
+print(timeit.timeit("bloom_effect_buffer(im, 255, smooth_=1)",
+                     "from __main__ import bloom_effect_buffer, im", number=10) / 10)
+```
+
 Left image with bloom effect 
 
 ![alt text](https://github.com/yoyoberenguer/bloom/blob/master/image1.png)
