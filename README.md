@@ -10,6 +10,14 @@ Left image with bloom effect
 ![alt text](https://github.com/yoyoberenguer/bloom/blob/master/image2.png)
 
 
+## How to spicy up your text or demo
+```
+Achieve with 30 passes of blur --> smooth_=30
+image = bloom_effect_buffer24(im, j, smooth_=30)
+```
+![alt text](https://github.com/yoyoberenguer/bloom/blob/master/Screendump13427.png)
+
+
 ## Definition:
 ```
 Bloom effet is a computer graphics effect used in video games, demos,
