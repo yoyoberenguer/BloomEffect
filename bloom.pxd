@@ -1,10 +1,10 @@
 
 
 # GAUSSIAN BLUR KERNEL 5x5 COMPATIBLE 24-32 BIT SURFACE
-cdef blur5x5_buffer24_c(unsigned char [::1] rgb_buffer, int width, int height, int depth)
-cdef blur5x5_buffer32_c(unsigned char [:] rgba_buffer, int width, int height, int depth)
-cdef unsigned char [:, :, ::1] blur5x5_array24_c(unsigned char [:, :, :] rgb_array_)
-cdef unsigned char [:, :, ::1] blur5x5_array32_c(unsigned char [:, :, :] rgb_array_)
+cdef blur5x5_buffer24_c(unsigned char [::1] rgb_buffer, int width, int height, int depth, mask=*)
+cdef blur5x5_buffer32_c(unsigned char [:] rgba_buffer, int width, int height, int depth, mask=*)
+cdef unsigned char [:, :, ::1] blur5x5_array24_c(unsigned char [:, :, :] rgb_array_, mask=*)
+cdef unsigned char [:, :, ::1] blur5x5_array32_c(unsigned char [:, :, :] rgb_array_, mask=*)
 
 # BRIGHT PASS FILTERS
 cdef bpf24_c(image, int threshold=*, bint transpose=*)

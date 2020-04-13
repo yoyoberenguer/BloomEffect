@@ -150,10 +150,6 @@ try:
 except ImportError:
     raise ImportError("\n<MAPPING> library is missing on your system.")
 
-if MAPPING.__version__ < 1.00:
-        raise ValueError("\nMAPPING version 1.00 is required.")
-print("\nMAPPING version: %s " % MAPPING.__version__)
-
 try:
     from MAPPING cimport xyz, to1d_c, to3d_c, vfb_rgb_c, vfb_c, vmap_buffer_c
 except ImportError:
@@ -175,24 +171,31 @@ DEF METHOD = 'static'
 
 # --------------------------- INTERFACE ----------------------------------
 
-cpdef blur5x5_buffer24(rgb_buffer, width, height, depth):
-    return blur5x5_buffer24_c(rgb_buffer, width, height, depth)
+cpdef blur5x5_buffer24(rgb_buffer, width, height, depth, mask=None):
+    return blur5x5_buffer24_c(rgb_buffer, width, height, depth, mask=None)
 
+cpdef blur5x5_buffer32(rgba_buffer, width, height, depth, mask=None):
+    return blur5x5_buffer32_c(rgba_buffer, width, height, depth, mask=None)
 
+cpdef blur5x5_array24(rgb_array_, mask=None):
+    return blur5x5_array24_c(rgb_array_, mask=None)
+
+cpdef blur5x5_array32(rgb_array_, mask=None):
+    return blur5x5_array32_c(rgb_array_, mask=None)
 
 # ******* METHODS THAT CAN BE ACCESS DIRECTLY FROM PYTHON SCRIPT ********
 
-cpdef bloom_effect_buffer24(surface_, threshold_, smooth_):
-    return bloom_effect_buffer24_c(surface_, threshold_, smooth_)
+cpdef bloom_effect_buffer24(surface_, threshold_, smooth_, mask_=None):
+    return bloom_effect_buffer24_c(surface_, threshold_, smooth_, mask_=None)
 
-cpdef bloom_effect_buffer32(surface_, int threshold_, int smooth_):
-    return bloom_effect_buffer32_c(surface_, threshold_, smooth_)
+cpdef bloom_effect_buffer32(surface_, int threshold_, int smooth_, mask_=None):
+    return bloom_effect_buffer32_c(surface_, threshold_, smooth_, mask_=None)
 
-cpdef bloom_effect_array24(surface_, threshold_, smooth_):
-    return bloom_effect_array24_c(surface_, threshold_, smooth_)
+cpdef bloom_effect_array24(surface_, threshold_, smooth_, mask_=None):
+    return bloom_effect_array24_c(surface_, threshold_, smooth_, mask_=None)
 
-cpdef bloom_effect_array32(surface_, threshold_, smooth_):
-    return bloom_effect_array32_c(surface_, threshold_, smooth_)
+cpdef bloom_effect_array32(surface_, threshold_, smooth_, mask_=None):
+    return bloom_effect_array32_c(surface_, threshold_, smooth_, mask_=None)
 
 cpdef scale_array24_mult(rgb_array):
     return scale_array24_mult_c(rgb_array)
@@ -204,7 +207,7 @@ cpdef scale_array24_mult(rgb_array):
 @cython.nonecheck(False)
 @cython.cdivision(True)
 cdef blur5x5_buffer24_c(unsigned char [::1] rgb_buffer,
-                      int width, int height, int depth):
+                      int width, int height, int depth, mask=None):
     """
     Method using a C-buffer as input image (width * height * depth) uint8 data type
     5 x5 Gaussian kernel used:
@@ -348,7 +351,7 @@ cdef blur5x5_buffer24_c(unsigned char [::1] rgb_buffer,
 @cython.nonecheck(False)
 @cython.cdivision(True)
 cdef blur5x5_buffer32_c(unsigned char [:] rgba_buffer,
-                      int width, int height, int depth):
+                      int width, int height, int depth, mask=None):
     """
     Method using a C-buffer as input image (width * height * depth) uint8 data type
     5 x5 Gaussian kernel used:
@@ -495,7 +498,7 @@ cdef blur5x5_buffer32_c(unsigned char [:] rgba_buffer,
 @cython.wraparound(False)
 @cython.nonecheck(False)
 @cython.cdivision(True)
-cdef unsigned char [:, :, ::1] blur5x5_array24_c(unsigned char [:, :, :] rgb_array_):
+cdef unsigned char [:, :, ::1] blur5x5_array24_c(unsigned char [:, :, :] rgb_array_, mask=None):
     """
     # Gaussian kernel 5x5
         # |1   4   6   4  1|
@@ -609,7 +612,7 @@ cdef unsigned char [:, :, ::1] blur5x5_array24_c(unsigned char [:, :, :] rgb_arr
 @cython.wraparound(False)
 @cython.nonecheck(False)
 @cython.cdivision(True)
-cdef unsigned char [:, :, ::1] blur5x5_array32_c(unsigned char [:, :, :] rgb_array_):
+cdef unsigned char [:, :, ::1] blur5x5_array32_c(unsigned char [:, :, :] rgb_array_, mask=None):
     """
     # Gaussian kernel 5x5
         # |1   4   6   4  1|
@@ -858,8 +861,7 @@ cdef bpf24_b_c(image, int threshold = 128, bint transpose=False):
         buffer_ = image.get_view('2')
         buffer_ = numpy.frombuffer(buffer_, dtype=numpy.uint8)
         mode = 1
-    except (pygame.error, ValueError, pygame.BufferError):
-
+    except:
         try:
             # RGB BUFFER
             # SLOWEST METHOD BUT WORKS EVEN IF THE BUFFER IS NOT

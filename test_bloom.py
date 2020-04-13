@@ -37,30 +37,26 @@ except ImportError:
     print("\n<numpy> library is missing on yor system."
           "\nTry: \n   C:\\pip install numpy on a window command prompt.")
 
-try:
-    import bloom
-    from bloom import bloom_effect_buffer24, bloom_effect_buffer32, bloom_effect_array24, \
-        bloom_effect_array32, blur5x5_buffer24, scale_array24_mult
-except ImportError:
-    print("\nHave you build the project?"
-          "\nC:>python setup_bloom.py build_ext --inplace")
+
+import bloom
+
 
 try:
-    import Scroll
-    from Scroll import scroll_transparency
-except ImportError:
-    print("\nIs Scroll.pyd missing ?")
+    from bloom import bloom_effect_buffer24, bloom_effect_buffer32, bloom_effect_array24, \
+            bloom_effect_array32, blur5x5_buffer24, scale_array24_mult
+except ImportError as e:
+    print("\n ", e)
 
 import timeit
 import os
 
-x = 500
-y = 500
+x = 601
+y = 600
 
 os.environ['SDL_VIDEODRIVER'] = 'windib'
 pygame.display.init()
 
-im = pygame.image.load("i2.png")
+im = pygame.image.load("i2.jpg")
 im = pygame.transform.smoothscale(im, (x, y))
 w, h = im.get_size()
 screen = pygame.display.set_mode((w * 2, h), pygame.SWSURFACE, 32)
@@ -77,34 +73,33 @@ print("get_view('3') ", timeit.timeit("im.get_view('3')",
                                       "from __main__ import pygame, im", number=N) / N)
 
 N = 10
+#
+# print("bloom_effect_buffer24 ",
+#       timeit.timeit("bloom_effect_buffer24(im, 255, smooth_=1)",
+#                     "from __main__ import bloom_effect_buffer24, im", number=N) / N)
+#
+# print("bloom_effect_buffer24 ",
+#       timeit.timeit("bloom_effect_buffer24(im, 255, smooth_=10)",
+#                     "from __main__ import bloom_effect_buffer24, im", number=N) / N)
+#
+# print("bloom_effect_array24 smooth = 1",
+#       timeit.timeit("bloom_effect_array24(im, 255, smooth_=1)",
+#                     "from __main__ import bloom_effect_array24, im", number=N) / N)
+#
+# print("bloom_effect_array24 smooth = 10",
+#       timeit.timeit("bloom_effect_array24(im, 255, smooth_=10)",
+#                     "from __main__ import bloom_effect_array24, im", number=N) / N)
+# im = im.convert_alpha()
+# print("bloom_effect_array32 smooth = 1",
+#       timeit.timeit("bloom_effect_array32(im, 255, smooth_=1)",
+#                     "from __main__ import bloom_effect_array32, im", number=N) / N)
+#
+# print("bloom_effect_array32 smooth = 10",
+#       timeit.timeit("bloom_effect_array32(im, 255, smooth_=10)",
+#                     "from __main__ import bloom_effect_array32, im", number=N) / N)
 
-print("bloom_effect_buffer24 ",
-      timeit.timeit("bloom_effect_buffer24(im, 255, smooth_=1)",
-                    "from __main__ import bloom_effect_buffer24, im", number=N) / N)
-
-print("bloom_effect_buffer24 ",
-      timeit.timeit("bloom_effect_buffer24(im, 255, smooth_=10)",
-                    "from __main__ import bloom_effect_buffer24, im", number=N) / N)
-
-print("bloom_effect_array24 smooth = 1",
-      timeit.timeit("bloom_effect_array24(im, 255, smooth_=1)",
-                    "from __main__ import bloom_effect_array24, im", number=N) / N)
-
-print("bloom_effect_array24 smooth = 10",
-      timeit.timeit("bloom_effect_array24(im, 255, smooth_=10)",
-                    "from __main__ import bloom_effect_array24, im", number=N) / N)
-im = im.convert_alpha()
-print("bloom_effect_array32 smooth = 1",
-      timeit.timeit("bloom_effect_array32(im, 255, smooth_=1)",
-                    "from __main__ import bloom_effect_array32, im", number=N) / N)
-
-print("bloom_effect_array32 smooth = 10",
-      timeit.timeit("bloom_effect_array32(im, 255, smooth_=10)",
-                    "from __main__ import bloom_effect_array32, im", number=N) / N)
-
-im = pygame.image.load("i2.png")
-im = pygame.transform.smoothscale(im, (x, y))
-im = im.convert(24)
+im = pygame.image.load("i2.jpg")
+im = pygame.transform.smoothscale(im, (x, y)).convert(24)
 
 CLOCK = pygame.time.Clock()
 i = 0
