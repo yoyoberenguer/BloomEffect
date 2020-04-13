@@ -39,24 +39,74 @@ except ImportError:
 
 try:
     import bloom
-    from bloom import bloom_effect_buffer, bloom_effect_array
+    from bloom import bloom_effect_buffer24, bloom_effect_buffer32, bloom_effect_array24, \
+        bloom_effect_array32, blur5x5_buffer24, scale_array24_mult
 except ImportError:
     print("\nHave you build the project?"
           "\nC:>python setup_bloom.py build_ext --inplace")
+
+try:
+    import Scroll
+    from Scroll import scroll_transparency
+except ImportError:
+    print("\nIs Scroll.pyd missing ?")
+
 import timeit
+import os
 
-im = pygame.image.load("I2.jpg")
-im = pygame.transform.smoothscale(im, (600, 600))
+x = 500
+y = 500
 
+os.environ['SDL_VIDEODRIVER'] = 'windib'
+pygame.display.init()
+
+im = pygame.image.load("i2.png")
+im = pygame.transform.smoothscale(im, (x, y))
 w, h = im.get_size()
-screen = pygame.display.set_mode((w, h))
+screen = pygame.display.set_mode((w * 2, h), pygame.SWSURFACE, 32)
+im = im.convert(24)
 
-print(timeit.timeit("bloom_effect_array(im, 255, smooth_=1)",
-                    "from __main__ import bloom_effect_array, im", number=10) / 10)
 
-print(timeit.timeit("bloom_effect_buffer(im, 255, smooth_=1)",
-                    "from __main__ import bloom_effect_buffer, im", number=10) / 10)
+N = 100
+print("tostring ", timeit.timeit("pygame.image.tostring(im, 'RGB')",
+                                 "from __main__ import pygame, im", number=N) / N)
+N = 100000
+print("get_view('2') ", timeit.timeit("im.get_view('2')",
+                                      "from __main__ import pygame, im", number=N) / N)
+print("get_view('3') ", timeit.timeit("im.get_view('3')",
+                                      "from __main__ import pygame, im", number=N) / N)
 
+N = 10
+
+print("bloom_effect_buffer24 ",
+      timeit.timeit("bloom_effect_buffer24(im, 255, smooth_=1)",
+                    "from __main__ import bloom_effect_buffer24, im", number=N) / N)
+
+print("bloom_effect_buffer24 ",
+      timeit.timeit("bloom_effect_buffer24(im, 255, smooth_=10)",
+                    "from __main__ import bloom_effect_buffer24, im", number=N) / N)
+
+print("bloom_effect_array24 smooth = 1",
+      timeit.timeit("bloom_effect_array24(im, 255, smooth_=1)",
+                    "from __main__ import bloom_effect_array24, im", number=N) / N)
+
+print("bloom_effect_array24 smooth = 10",
+      timeit.timeit("bloom_effect_array24(im, 255, smooth_=10)",
+                    "from __main__ import bloom_effect_array24, im", number=N) / N)
+im = im.convert_alpha()
+print("bloom_effect_array32 smooth = 1",
+      timeit.timeit("bloom_effect_array32(im, 255, smooth_=1)",
+                    "from __main__ import bloom_effect_array32, im", number=N) / N)
+
+print("bloom_effect_array32 smooth = 10",
+      timeit.timeit("bloom_effect_array32(im, 255, smooth_=10)",
+                    "from __main__ import bloom_effect_array32, im", number=N) / N)
+
+im = pygame.image.load("i2.png")
+im = pygame.transform.smoothscale(im, (x, y))
+im = im.convert(24)
+
+CLOCK = pygame.time.Clock()
 i = 0
 j = 255
 STOP_DEMO = True
@@ -64,9 +114,9 @@ while STOP_DEMO:
     pygame.event.pump()
     keys = pygame.key.get_pressed()
 
-    # screen.fill((10, 10, 10, 255))
-    org = bloom_effect_array(im, j, smooth_=1)
-    screen.blit(org, (0, 0))
+    bloom2_x10 = bloom_effect_array24(im, j, smooth_=1)  # smooth_=10
+    screen.blit(bloom2_x10, (0, 0))
+
     pygame.display.flip()
 
     if keys[pygame.K_ESCAPE]:
@@ -80,3 +130,8 @@ while STOP_DEMO:
 
     if j < 0:
         j = 255
+
+    CLOCK.tick()
+    time_ = CLOCK.get_time()
+    fps_ = CLOCK.get_fps()
+    print(fps_)
