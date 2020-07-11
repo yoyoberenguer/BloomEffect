@@ -103,51 +103,10 @@ the section building the project.
 
 ```
 
-## Example in python IDE 
-```
-
-import pygame
-import numpy
-from numpy import asarray, uint8, float32, zeros, float64
-
-#<---  HERE --->
-import bloom
-from bloom import bloom_effect_buffer, bloom_effect_array
-
-im = pygame.image.load("I2.jpg")
-im = pygame.transform.smoothscale(im, (600, 600))
-
-w, h = im.get_size()
-screen = pygame.display.set_mode((w, h))
-
-i = 0
-j = 255
-STOP_DEMO = True
-while STOP_DEMO:
-    pygame.event.pump()
-    keys = pygame.key.get_pressed()
-
-    # screen.fill((10, 10, 10, 255))
-    org = bloom_effect_array(im, j, smooth_=1)
-    screen.blit(org, (0, 0))
-    pygame.display.flip()
-
-    if keys[pygame.K_ESCAPE]:
-        STOP_DEMO = False
-
-    if keys[pygame.K_F8]:
-        pygame.image.save(screen, 'Screendump' + str(i) + '.png')
-    i += 1
-    j -= 1
-    if j < 0:
-        j = 255
-```
-
 ## DEMO version
 ```
-Decompress the archive in the source diretory. 
-In order to work, demo.exe must be under the same directory with i2.jpg 
-Copy/move i2.jpg if necessary to demo.exe location.
+In the folder where the source file are located :
+python test_bloom.py
 ```
 
 ## Timings
