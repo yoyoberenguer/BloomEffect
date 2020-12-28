@@ -72,7 +72,7 @@ and a C-compiler are correctly install on your system.
 
 ```
 ## Two methods
-```
+```python
 # Below bloom method is using massively numpy.ndarray to manipulate data.
 bloom = bloom_effect_array(surface, threshold, smooth_=1)
 
@@ -110,7 +110,7 @@ python test_bloom.py
 ```
 
 ## Timings
-```
+```python
 print(timeit.timeit("bloom_effect_array(im, 255, smooth_=1)",
                     "from __main__ import bloom_effect_array, im", number=10) / 10)
 print(timeit.timeit("bloom_effect_buffer(im, 255, smooth_=1)",
