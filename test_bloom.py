@@ -26,8 +26,8 @@ SOFTWARE.
 try:
     import pygame
 except ImportError:
-    print("\n<numpy> library is missing on your system."
-          "\nTry: \n   C:\\pip install numpy on a window command prompt.")
+    print("\n<pygame> library is missing on your system."
+          "\nTry: \n   C:\\pip install pygame on a window command prompt.")
     raise SystemExit
 
 try:
