@@ -460,7 +460,7 @@ cdef blur5x5_buffer32_c(unsigned char [:] rgba_buffer,
         # to fetch data vertically with the vmap_buffer function.
         for i in prange(0, b_length, depth, schedule=METHOD, num_threads=THREADS):
 
-                index = vmap_buffer_c(i, width, height, 3)
+                index = vmap_buffer_c(i, width, height, depth)
 
                 r, g, b = 0, 0, 0
 
