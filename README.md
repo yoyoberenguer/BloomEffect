@@ -74,6 +74,9 @@ Acronyme : bpf (bright pass filter)
    with the special flag BLEND_RGB_ADD (additive blend mode effect).
 ```
 
+![alt text](https://github.com/yoyoberenguer/Fisheye/blob/master/BLOOM.png)
+
+
 ## Blur method details
 ```cython
 blur5x5_array24(rgb_array_,  mask=None)
