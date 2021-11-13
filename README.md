@@ -41,7 +41,9 @@ scene. It became widely used in video games after an article on the
 technique was published by the authors of Tron 2.0 in 2004.
 REF https://en.wikipedia.org/wiki/Bloom_(shader_effect)
 
+![alt text](https://github.com/yoyoberenguer/BloomEffect/blob/version-1.0.0/Capture.PNG)
 
+![alt text](https://github.com/yoyoberenguer/BloomEffect/blob/version-1.0.0/Capture1.PNG)
 
 
 ## Installation 
@@ -74,7 +76,7 @@ Acronyme : bpf (bright pass filter)
    with the special flag BLEND_RGB_ADD (additive blend mode effect).
 ```
 
-![alt text](https://github.com/yoyoberenguer/Fisheye/blob/master/BLOOM.png)
+![alt text](https://github.com/yoyoberenguer/BloomEffect/blob/master/BLOOM.png)
 
 
 ## Blur method details
