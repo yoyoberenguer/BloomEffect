@@ -126,7 +126,9 @@ If you are still looking for better performance, you can also downscale the
 image time 2 and rescale it to its original size after processing. 
 However this technique has a limit, as downscaling / upscaling the image will 
 alter the image quality and provide a lower resolution to a texure/image, e.g
-Jagged lines or pixalated aspect when the downsacle factor is too high)
+Jagged lines or pixalated aspect when the downsacle factor is too high). To minimize
+the image quality degradation, use pygame smoothscale (bilineare filtering) instead 
+of the method scale
 
 ## Building cython code
 
