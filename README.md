@@ -41,6 +41,8 @@ scene. It became widely used in video games after an article on the
 technique was published by the authors of Tron 2.0 in 2004.
 REF https://en.wikipedia.org/wiki/Bloom_(shader_effect)
 
+* left image with bloom effect 
+
 ![alt text](https://github.com/yoyoberenguer/BloomEffect/blob/version-1.0.0/Capture.PNG)
 
 ![alt text](https://github.com/yoyoberenguer/BloomEffect/blob/version-1.0.0/Capture1.PNG)
@@ -97,26 +99,28 @@ bloom_effect_array24_inplace(surface_, threshold_, fast_ = False)
 bloom_effect_array32_inplace(surface_, threshold_, fast_ = False)
 ```
 
-#### Smooth factor
+#### - Smooth factor
 
 The ```smooth``` option allows to create realistic bloom effect by smoothing the sub-surface 
 with a define number of blur passes. 
 With multiple blur passes, the light source will spread evenly accross the image without 
 altering the image quality. 
 
-Left image with smooth = 1 and right with smooth = 10
+* Left image with smooth = 1 and right with smooth = 10
 
-The smooth effect (right image) shows a less pronouce bloom effect on the planet surface 
-and moon light refraction. The left image looks more sharp and accurate.
+The smooth effect (right image) produce a less intense bloom effect on the planet surface 
+and on the first moon (light refraction). With blur>1 the image looks more sharp and the 
+light source appear to be more evenly spread 
+
 ![alt text](https://github.com/yoyoberenguer/BloomEffect/blob/version-1.0.0/image3.png)
 
-#### Fast flag
+#### - Fast flag
 
 The ```fast``` flag will boost the overall performance of the bloom algorithm. 
 When fast is True, only the smallest sub-surface (x16) is used for the bloom 
 effect providing a good compromise between speed and effect quality. 
 
-#### Still not fast enough ?
+#### - Still not fast enough ?
 
 If you are still looking for better performance, you can also downscale the 
 image time 2 and rescale it to its original size after processing. 
