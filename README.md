@@ -154,7 +154,7 @@ with a define number of blur passes.
 With multiple blur passes, the light source will spread evenly accross the image without 
 altering the image quality. 
 
-* Left image with smooth = 1 and right with smooth = 10
+* Left image with smooth = 1 and right with smooth 5, 8, 10
 
 The smooth effect (right image) produce a less intense bloom effect on the planet surface 
 and on the first moon (light refraction). With blur>1 the image looks more sharp and the 
