@@ -2,7 +2,7 @@
 
 Bloom artefact  
 
-![alt text](https://raw.githubusercontent.com/yoyoberenguer/BloomEffect/version-1.0.0/Assets/bloom_bpf_values.png)
+![alt text](https://raw.githubusercontent.com/yoyoberenguer/BloomEffect/version-1.0.1/Assets/bloom_bpf_values.png)
 
 This library contains Gaussian blur kernel 5x5 algoritms, bright pass filters and bloom 
 methods designed to work with Pygame and python.
@@ -32,7 +32,7 @@ The bloom effect can also be used for different applications such
 as : image processing, 2D light effect, spritesheet, demos and 
 text enhancement, neon effect etc 
 
-![alt text](https://raw.githubusercontent.com/yoyoberenguer/BloomEffect/version-1.0.0/Assets/text_bloom.png)
+![alt text](https://raw.githubusercontent.com/yoyoberenguer/BloomEffect/version-1.0.1/Assets/text_bloom.png)
 
 The project is under the ```MIT license```
 
@@ -50,9 +50,9 @@ REF https://en.wikipedia.org/wiki/Bloom_(shader_effect)
 * left image with bloom effect 
 
 
-![alt text](https://raw.githubusercontent.com/yoyoberenguer/BloomEffect/version-1.0.0/Assets/i2_bloom.png)
+![alt text](https://raw.githubusercontent.com/yoyoberenguer/BloomEffect/version-1.0.1/Assets/i2_bloom.png)
 
-![alt text](https://raw.githubusercontent.com/yoyoberenguer/BloomEffect/version-1.0.0/Assets/i3_bloom.png)
+![alt text](https://raw.githubusercontent.com/yoyoberenguer/BloomEffect/version-1.0.1/Assets/i3_bloom.png)
 
 
 
@@ -91,7 +91,7 @@ Acronyme : bpf (bright pass filter)
    with the special flag BLEND_RGB_ADD (additive blend mode effect).
 ```
 
-![alt text](https://raw.githubusercontent.com/yoyoberenguer/BloomEffect/version-1.0.0/BLOOM.png)
+![alt text](https://raw.githubusercontent.com/yoyoberenguer/BloomEffect/version-1.0.1/BLOOM.png)
 
 ## Blur method details
 ```cython
@@ -160,7 +160,7 @@ The smooth effect (right image) produce a less intense bloom effect on the plane
 and on the first moon (light refraction). With blur>1 the image looks more sharp and the 
 light source appear to be more evenly spread 
 
-![alt text](https://raw.githubusercontent.com/yoyoberenguer/BloomEffect/version-1.0.0/bloom_smooth_values.png)
+![alt text](https://raw.githubusercontent.com/yoyoberenguer/BloomEffect/version-1.0.1/Assets/bloom_smooth_values.png)
 
 
 #### - Fast flag
