@@ -5,9 +5,9 @@ Bloom artefact
 ![alt text](https://raw.githubusercontent.com/yoyoberenguer/BloomEffect/version-1.0.1/Assets/bloom_bpf_values.png)
 
 This library contains Gaussian blur kernel 5x5 algoritms, bright pass filters and bloom 
-methods designed to work with Pygame and python.
+methods designed to work with ```Pygame``` and ```python```.
 
-It provides fast algorithms to create 2D bloom effect 
+It provides fast algorithms to create ```2D bloom effect``` 
 for pygame.Surface (SDL suface) or images (PNG, JPG etc), see 
 pygame image format compatibility for more information.
 These algorithms can be used offline or in real time processing for 
@@ -20,17 +20,17 @@ post-processing (surface transformation such as blur and bloom effect)
 before your game main loop e.g :
 Texturing effect, Sprite or SpriteSheet additional effect. 
    
-The algorithms are written using cython with OPENMP capability (multi-
+The algorithms are written using ```cython``` with OPENMP capability (multi-
 processing). This library is build by default with the flag OPENMP, 
 providing the best performance for real time processing. 
 You can also turn off the multi-processing to balance evenly the 
 CPU load between your game and the real time bloom processing. 
-Please refer to the section OPENMP for more details on how to turn
+Please refer to the section ```OPENMP``` for more details on how to turn
 the multi-processing on/off. 
 
 The bloom effect can also be used for different applications such 
 as : image processing, 2D light effect, spritesheet, demos and 
-text enhancement, neon effect etc 
+```text enhancement```, neon effect etc 
 
 ![alt text](https://raw.githubusercontent.com/yoyoberenguer/BloomEffect/version-1.0.1/Assets/text_bloom.png)
 
@@ -47,7 +47,7 @@ scene. It became widely used in video games after an article on the
 technique was published by the authors of Tron 2.0 in 2004.
 REF https://en.wikipedia.org/wiki/Bloom_(shader_effect)
 
-* left image with bloom effect 
+* Right image with bloom effect 
 
 
 ![alt text](https://raw.githubusercontent.com/yoyoberenguer/BloomEffect/version-1.0.1/Assets/i2_bloom.png)
@@ -284,8 +284,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 ## Testing: 
 ```python
-from BloomEffect.tests import test_bloom 
-from test_bloom import run_testsuite
+import BloomEffect
+from BloomEffect.tests.test_bloom import run_testsuite
+
 run_testsuite()
 
 ```
