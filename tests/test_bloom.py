@@ -48,8 +48,8 @@ except ImportError:
 
 from BloomEffect.bloom import blur5x5_array24, blur5x5_array32, blur5x5_array24_inplace, blur5x5_array32_inplace, \
     test_bpf24_c, test_bpf24_inplace, test_bpf32_c, test_bpf32_inplace, kernel_deviation, filtering24,\
-    build_mask_from_surface, filtering32, bloom_effect_array24_inplace, bloom_effect_array32_inplace, \
-    bloom_effect_array24, bloom_effect_array32
+    build_mask_from_surface, filtering32, bloom_effect24_inplace, bloom_effect32_inplace, \
+    bloom_effect24, bloom_effect32
 
 
 import time
@@ -526,17 +526,17 @@ class TestBloomEffectArray24Inplace(unittest.TestCase):
         background = pygame.transform.smoothscale(background, (800, 600))
         background_cp = background.copy()
 
-        bloom_effect_array24_inplace(background, 128, fast_=False)
-        self.assertRaises(AssertionError, bloom_effect_array24_inplace, background, -5, 1)
-        self.assertRaises(AssertionError, bloom_effect_array24_inplace, background, 1500, 1)
-        self.assertRaises(AssertionError, bloom_effect_array24_inplace, background, 255, -8)
-        self.assertRaises(AssertionError, bloom_effect_array24_inplace, 1, 255, True)
+        bloom_effect24_inplace(background, 128, fast_=False)
+        self.assertRaises(AssertionError, bloom_effect24_inplace, background, -5, 1)
+        self.assertRaises(AssertionError, bloom_effect24_inplace, background, 1500, 1)
+        self.assertRaises(AssertionError, bloom_effect24_inplace, background, 255, -8)
+        self.assertRaises(AssertionError, bloom_effect24_inplace, 1, 255, True)
 
         display(screen, checker, background_cp, background)
 
         background = pygame.image.load('../Assets/I2.png').convert()
         background = pygame.transform.smoothscale(background, (800, 600))
-        bloom_effect_array24_inplace(background, 128, fast_=True)
+        bloom_effect24_inplace(background, 128, fast_=True)
 
         display(screen, checker, background_cp, background)
 
@@ -556,18 +556,18 @@ class TestBloomEffectArray32Inplace(unittest.TestCase):
         background = pygame.transform.smoothscale(background, (800, 600))
         background_cp = background.copy()
 
-        bloom_effect_array32_inplace(background, 128, fast_=False)
+        bloom_effect32_inplace(background, 128, fast_=False)
 
-        self.assertRaises(AssertionError, bloom_effect_array32_inplace, background, -5, 1)
-        self.assertRaises(AssertionError, bloom_effect_array32_inplace, background, 1500, 1)
-        self.assertRaises(AssertionError, bloom_effect_array32_inplace, background, 255, -8)
-        self.assertRaises(AssertionError, bloom_effect_array32_inplace, 1, 255, True)
+        self.assertRaises(AssertionError, bloom_effect32_inplace, background, -5, 1)
+        self.assertRaises(AssertionError, bloom_effect32_inplace, background, 1500, 1)
+        self.assertRaises(AssertionError, bloom_effect32_inplace, background, 255, -8)
+        self.assertRaises(AssertionError, bloom_effect32_inplace, 1, 255, True)
 
         display(screen, checker, background_cp, background)
 
         background = pygame.image.load('../Assets/I2.png').convert()
         background = pygame.transform.smoothscale(background, (800, 600))
-        bloom_effect_array32_inplace(background, 128, fast_=True)
+        bloom_effect32_inplace(background, 128, fast_=True)
 
         display(screen, checker, background_cp, background)
 
@@ -586,27 +586,27 @@ class TestBloomEffectArray24(unittest.TestCase):
         background = pygame.image.load('../Assets/Aliens.jpg').convert()
         background = pygame.transform.smoothscale(background, (800, 600))
 
-        image = bloom_effect_array24(background, threshold_=45, smooth_=1, fast_=False)
+        image = bloom_effect24(background, threshold_=45, smooth_=1, fast_=False)
 
         display(screen, checker, background, image)
-        self.assertRaises(AssertionError, bloom_effect_array24, background, -5, 1, fast_=False)
-        self.assertRaises(AssertionError, bloom_effect_array24, background, 258, 1, fast_=False)
-        self.assertRaises(AssertionError, bloom_effect_array24, background, 45, -5, fast_=False)
-        self.assertRaises(AssertionError, bloom_effect_array24, background, 45, 1, fast_=-8)
-        self.assertRaises(AssertionError, bloom_effect_array24, 1, 1, fast_=False)
+        self.assertRaises(AssertionError, bloom_effect24, background, -5, 1, fast_=False)
+        self.assertRaises(AssertionError, bloom_effect24, background, 258, 1, fast_=False)
+        self.assertRaises(AssertionError, bloom_effect24, background, 45, -5, fast_=False)
+        self.assertRaises(AssertionError, bloom_effect24, background, 45, 1, fast_=-8)
+        self.assertRaises(AssertionError, bloom_effect24, 1, 1, fast_=False)
 
         self.assertIsInstance(image, pygame.Surface)
 
         # test with convert_alpha
         background = pygame.image.load('../Assets/i2.png').convert_alpha()
         background = pygame.transform.smoothscale(background, (800, 600))
-        image = bloom_effect_array24(background, threshold_=45, smooth_=1, fast_=True)
+        image = bloom_effect24(background, threshold_=45, smooth_=1, fast_=True)
         display(screen, checker, background, image)
 
         # test smooth > 1
         background = pygame.image.load('../Assets/Aliens.jpg').convert()
         background = pygame.transform.smoothscale(background, (800, 600))
-        image = bloom_effect_array24(background, threshold_=45, smooth_=15, fast_=True)
+        image = bloom_effect24(background, threshold_=45, smooth_=15, fast_=True)
         display(screen, checker, background, image)
 
 
@@ -624,30 +624,30 @@ class TestBloomEffectArray32(unittest.TestCase):
         background = pygame.image.load('../Assets/Aliens.jpg').convert_alpha()
         background = pygame.transform.smoothscale(background, (800, 600))
 
-        image = bloom_effect_array32(background, threshold_=45, smooth_=1, fast_=False)
+        image = bloom_effect32(background, threshold_=45, smooth_=1, fast_=False)
 
         display(screen, checker, background, image)
-        self.assertRaises(AssertionError, bloom_effect_array32, background, -5, 1, fast_=False)
-        self.assertRaises(AssertionError, bloom_effect_array32, background, 258, 1, fast_=False)
-        self.assertRaises(AssertionError, bloom_effect_array32, background, 45, -5, fast_=False)
-        self.assertRaises(AssertionError, bloom_effect_array32, background, 45, 1, fast_=-8)
-        self.assertRaises(AssertionError, bloom_effect_array32, 1, 1, fast_=False)
+        self.assertRaises(AssertionError, bloom_effect32, background, -5, 1, fast_=False)
+        self.assertRaises(AssertionError, bloom_effect32, background, 258, 1, fast_=False)
+        self.assertRaises(AssertionError, bloom_effect32, background, 45, -5, fast_=False)
+        self.assertRaises(AssertionError, bloom_effect32, background, 45, 1, fast_=-8)
+        self.assertRaises(AssertionError, bloom_effect32, 1, 1, fast_=False)
 
         self.assertIsInstance(image, pygame.Surface)
 
         # test with convert_alpha
         background = pygame.image.load('../Assets/i2.png').convert_alpha()
         background = pygame.transform.smoothscale(background, (800, 600))
-        image = bloom_effect_array32(background, threshold_=45, smooth_=1, fast_=True)
+        image = bloom_effect32(background, threshold_=45, smooth_=1, fast_=True)
         display(screen, checker, background, image)
 
         background = pygame.image.load('../Assets/Aliens.jpg').convert()
         background = pygame.transform.smoothscale(background, (800, 600))
-        self.assertRaises(ValueError, bloom_effect_array32, background, threshold_=45, smooth_=15, fast_=True)
+        self.assertRaises(ValueError, bloom_effect32, background, threshold_=45, smooth_=15, fast_=True)
 
         background = pygame.image.load('../Assets/Aliens.jpg').convert_alpha()
         background = pygame.transform.smoothscale(background, (800, 600))
-        image = bloom_effect_array32(background, threshold_=45, smooth_=15, fast_=True)
+        image = bloom_effect32(background, threshold_=45, smooth_=15, fast_=True)
         display(screen, checker, background, image)
 
 def run_testsuite():

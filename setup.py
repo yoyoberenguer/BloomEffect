@@ -6,18 +6,18 @@
 
 # for python 3.8
 # C:\Users\yoann\AppData\Roaming\Python\Python38\Scripts\twine upload
-# --verbose --repository testpypi dist/bloom-effect-1.0.3-cp38-cp38-win_amd64.whl
+# --verbose --repository testpypi dist/BloomEffect-1.0.3-cp38-cp38-win_amd64.whl
 
 # for python 3.6
 # C:\Users\yoann\AppData\Roaming\Python\Python36\Scripts\twine upload
-# --verbose --repository testpypi dist/bloom-effect-1.0.3-cp36-cp36-win_amd64.whl
+# --verbose --repository testpypi dist/BloomEffect-1.0.3-cp36-cp36-win_amd64.whl
 
 # python setup.py bdist_wheel
 # twine upload --verbose --repository testpypi dist/*
 
 # PRODUCTION v:
 # version 1.0.2
-# C:\Users\yoann\AppData\Roaming\Python\Python38\Scripts\twine upload --verbose dist/bloom-effect-1.0.2*
+# C:\Users\yoann\AppData\Roaming\Python\Python38\Scripts\twine upload --verbose dist/BloomEffect-1.0.2*
 
 # CREATING EXECUTABLE
 # pyinstaller --onefile pyinstaller_config.spec
@@ -51,7 +51,7 @@ setuptools.setup(
     url                          ="https://github.com/yoyoberenguer/BloomEffect",
     packages                     =setuptools.find_packages(),
     ext_modules                  =cythonize([
-        Extension("BloomEffect.bloom", ["bloom.pyx"],
+        Extension("bloom", ["bloom.pyx"],
                   extra_compile_args=["/openmp", "/Qpar", "/fp:fast", "/O2", "/Oy", "/Ot"], language="c")]),
     include_dirs=[numpy.get_include()],
     define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")],
@@ -96,8 +96,10 @@ setuptools.setup(
     data_files=[('./lib/site-packages/BloomEffect',
                  ['__init__.pxd',
                   '__init__.py',
+                  'bloom.c',
                   'bloom.pxd',
                   'bloom.pyx',
+                  'example.py',
                   'LICENSE',
                   'MANIFEST.in',
                   'pyproject.toml',
@@ -120,7 +122,14 @@ setuptools.setup(
                   'Assets/color_mask_circle.png',
                   'Assets/I1.png',
                   'Assets/i2.png',
-                  'Assets/background_checker.png'
+                  'Assets/background_checker.png',
+                  'Assets/bloom_bpf_values.png',
+                  'Assets/bloom_smooth_values.png',
+                  'Assets/control.png',
+                  'Assets/i2_bloom.png',
+                  'Assets/i3.png',
+                  'Assets/i3_bloom.png',
+                  'Assets/text_bloom.png'
                  ])
                 ],
 

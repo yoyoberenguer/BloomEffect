@@ -3,6 +3,8 @@ include __init__.py
 include pyproject.toml
 include bloom.pxd
 include bloom.pyx
+include bloom.c
+include example.py
 include LICENSE
 include MANIFEST.in
 include pyproject.toml

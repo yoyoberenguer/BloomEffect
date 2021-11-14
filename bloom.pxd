@@ -35,13 +35,13 @@ cdef void blur5x5_array24_inplace_c(unsigned char [:, :, :] rgb_array_, object m
 cdef void blur5x5_array32_inplace_c(unsigned char [:, :, :] rgba_array_, object mask=*)
 
 # KERNEL
-cdef inline np.ndarray[np.float64_t, ndim=2] kernel_deviation_c(double sigma, unsigned short int kernel_size)
+cdef np.ndarray[np.float64_t, ndim=2] kernel_deviation_c(double sigma, unsigned short int kernel_size)
 
 # BRIGHT PASS FILTERS
-cdef inline object bpf24_c(unsigned char [:, :, :] input_array_, unsigned char threshold = *)
-cdef inline void bpf24_inplace_c(unsigned char [:, :, :] input_array_, unsigned char threshold = *)
-cdef inline unsigned char [:, :, ::1] bpf32_c(image, unsigned char threshold_=*)
-cdef inline void bpf32_inplace_c(object image_, unsigned char threshold_ = *)
+cdef object bpf24_c(unsigned char [:, :, :] input_array_, unsigned char threshold = *)
+cdef void bpf24_inplace_c(unsigned char [:, :, :] input_array_, unsigned char threshold = *)
+cdef unsigned char [:, :, ::1] bpf32_c(image, unsigned char threshold_=*)
+cdef void bpf32_inplace_c(object image_, unsigned char threshold_ = *)
 
 # FILTERING
 cdef void filtering24_inplace_c(object surface_, float [:, :] mask_)
