@@ -83,7 +83,15 @@ DEF ONE_SIXTEENTH = 1.0 / 16.0
 
 from libc.math cimport exp, pi
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
+
+# Version 1.0.0 to version 1.0.1 changes
+# + Renamed bloom function bloom_effect_array24 to bloom_effect24
+# + Renamed bloom function bloom_effect_array32 to bloom_effect32
+# + Renamed bloom_effect_array24_inplace to bloom_effect24_inplace
+# + Renamed bloom_effect32_inplace to bloom_effect32_inplace
+# + Added example.py file
+# + Changed Readme.md file
 
 # TODO CREATE GAUSSIAN BLUR WITH DIFFERENT KERNEL
 # TODO MASK FOR FUNCTION BLUR
@@ -204,7 +212,7 @@ cpdef void blur5x5_array32_inplace(object rgba_array_, object mask=None):
 
 # --------------------------------------------------- BLOOM METHODS ----------------------------------------------------
 
-cpdef bloom_effect_array24(surface_, threshold_, smooth_ = 1, mask_ = None, fast_ = False):
+cpdef bloom_effect24(surface_, threshold_, smooth_ = 1, mask_ = None, fast_ = False):
     """
     CREATE A BLOOM EFFECT ON A PYGAME.SURFACE (COMPATIBLE 24 BIT SURFACE)
     THIS METHOD IS A 3D NUMPY NDARRAY AS STRUCTURE (CONTAINING RGB VALUES)
@@ -248,7 +256,7 @@ cpdef bloom_effect_array24(surface_, threshold_, smooth_ = 1, mask_ = None, fast
 
     return bloom_effect_array24_c(surface_, threshold_, smooth_, mask_, fast_)
 
-cpdef bloom_effect_array32(surface_, threshold_, smooth_ = 1, mask_ = None, fast_ = False):
+cpdef bloom_effect32(surface_, threshold_, smooth_ = 1, mask_ = None, fast_ = False):
     """
     CREATE A BLOOM EFFECT ON A PYGAME.SURFACE (COMPATIBLE 32 BIT SURFACE)
     THIS METHOD IS A 3D NUMPY NDARRAY AS STRUCTURE (CONTAINING RGBA VALUES)
@@ -293,7 +301,7 @@ cpdef bloom_effect_array32(surface_, threshold_, smooth_ = 1, mask_ = None, fast
     return bloom_effect_array32_c(surface_, threshold_, smooth_, mask_, fast_)
 
 # TODO smooth for inplace method
-cpdef void bloom_effect_array24_inplace(object surface_, object threshold_, object fast_ = False)except *:
+cpdef void bloom_effect24_inplace(object surface_, object threshold_, object fast_ = False)except *:
     """
     BLOOM A PYGAME SURFACE (24 - 32 BIT) INPLACE 
     
@@ -311,7 +319,7 @@ cpdef void bloom_effect_array24_inplace(object surface_, object threshold_, obje
     bloom_effect_array24_inplace_c(surface_, threshold_, fast_)
 
 # TODO smooth for inplace method
-cpdef void bloom_effect_array32_inplace(object surface_, object threshold_, object fast_ = False)except *:
+cpdef void bloom_effect32_inplace(object surface_, object threshold_, object fast_ = False)except *:
     """
     BLOOM A PYGAME SURFACE 32 BIT INPLACE
 

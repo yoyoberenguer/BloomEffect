@@ -47,14 +47,14 @@ except ImportError:
 
 from BloomEffect.bloom import blur5x5_array24, blur5x5_array32, blur5x5_array24_inplace, blur5x5_array32_inplace, \
     test_bpf24_c, test_bpf24_inplace, test_bpf32_c, test_bpf32_inplace, kernel_deviation, filtering24,\
-    build_mask_from_surface, filtering32, bloom_effect_array24_inplace, bloom_effect_array32_inplace, \
-    bloom_effect_array24, bloom_effect_array32, test_array32_rescale
+    build_mask_from_surface, filtering32, bloom_effect24_inplace, bloom_effect32_inplace, \
+    bloom_effect24, bloom_effect32, test_array32_rescale
 
 import timeit
 import os
 
 # TODO uncomment on release
-PROJECT_PATH = PyGameEffect.__path__
+PROJECT_PATH = BloomEffect.__path__
 os.chdir(PROJECT_PATH[0] + "\\tests")
 
 
@@ -100,61 +100,61 @@ print("\nPerformance testing blur5x5_array24_inplace per call %s overall time %s
       % (round(float(t)/float(N), 10), round(float(t), 5), N))
 
 # --------------- BLOOM EFFECT
-t = timeit.timeit("bloom_effect_array24(background, 128)",
-                  "from __main__ import bloom_effect_array24, background", number=N)
-print("\nPerformance testing bloom_effect_array24 per call %s overall time %s for %s"
+t = timeit.timeit("bloom_effect24(background, 128)",
+                  "from __main__ import bloom_effect24, background", number=N)
+print("\nPerformance testing bloom_effect24 per call %s overall time %s for %s"
       % (round(float(t)/float(N), 10), round(float(t), 5), N))
 
 # smooth = 10
-t = timeit.timeit("bloom_effect_array24(background, 128, smooth_=10)",
-                  "from __main__ import bloom_effect_array24, background", number=N)
-print("\nPerformance testing bloom_effect_array24 per call %s overall time %s for %s"
+t = timeit.timeit("bloom_effect24(background, 128, smooth_=10)",
+                  "from __main__ import bloom_effect24, background", number=N)
+print("\nPerformance testing bloom_effect24 per call %s overall time %s for %s"
       % (round(float(t)/float(N), 10), round(float(t), 5), N))
 
 # Fast flag
-t = timeit.timeit("bloom_effect_array24(background, 128, fast_=True)",
-                  "from __main__ import bloom_effect_array24, background", number=N)
-print("\nPerformance testing bloom_effect_array24 per call %s overall time %s for %s"
+t = timeit.timeit("bloom_effect24(background, 128, fast_=True)",
+                  "from __main__ import bloom_effect24, background", number=N)
+print("\nPerformance testing bloom_effect24 per call %s overall time %s for %s"
       % (round(float(t)/float(N), 10), round(float(t), 5), N))
 
-t = timeit.timeit("bloom_effect_array32(background, 128)",
-                  "from __main__ import bloom_effect_array32, background", number=N)
-print("\nPerformance testing bloom_effect_array32 per call %s overall time %s for %s"
+t = timeit.timeit("bloom_effect24(background, 128)",
+                  "from __main__ import bloom_effect24, background", number=N)
+print("\nPerformance testing bloom_effect24 per call %s overall time %s for %s"
       % (round(float(t)/float(N), 10), round(float(t), 5), N))
 
 # smooth = 10
-t = timeit.timeit("bloom_effect_array32(background, 128, smooth_=10)",
-                  "from __main__ import bloom_effect_array32, background", number=N)
-print("\nPerformance testing bloom_effect_array32 per call %s overall time %s for %s"
+t = timeit.timeit("bloom_effect32(background, 128, smooth_=10)",
+                  "from __main__ import bloom_effect32, background", number=N)
+print("\nPerformance testing bloom_effect32 per call %s overall time %s for %s"
       % (round(float(t)/float(N), 10), round(float(t), 5), N))
 
 # Fast flag
-t = timeit.timeit("bloom_effect_array32(background, 128, fast_=True)",
-                  "from __main__ import bloom_effect_array32, background", number=N)
-print("\nPerformance testing bloom_effect_array32 per call %s overall time %s for %s"
+t = timeit.timeit("bloom_effect32(background, 128, fast_=True)",
+                  "from __main__ import bloom_effect32, background", number=N)
+print("\nPerformance testing bloom_effect32 per call %s overall time %s for %s"
       % (round(float(t)/float(N), 10), round(float(t), 5), N))
 
 background = pygame.image.load('../Assets/Aliens.jpg').convert_alpha()
 background = pygame.transform.smoothscale(background, (1280, 1024))
-t = timeit.timeit("bloom_effect_array24_inplace(background, 128, fast_=False)",
-                  "from __main__ import bloom_effect_array24_inplace, background", number=N)
-print("\nPerformance testing bloom_effect_array24_inplace per call %s overall time %s for %s"
+t = timeit.timeit("bloom_effect24_inplace(background, 128, fast_=False)",
+                  "from __main__ import bloom_effect24_inplace, background", number=N)
+print("\nPerformance testing bloom_effect24_inplace per call %s overall time %s for %s"
       % (round(float(t)/float(N), 10), round(float(t), 5), N))
 
-t = timeit.timeit("bloom_effect_array24_inplace(background, 128, fast_=True)",
-                  "from __main__ import bloom_effect_array24_inplace, background", number=N)
-print("\nPerformance testing bloom_effect_array24_inplace per call %s overall time %s for %s"
+t = timeit.timeit("bloom_effect24_inplace(background, 128, fast_=True)",
+                  "from __main__ import bloom_effect24_inplace, background", number=N)
+print("\nPerformance testing bloom_effect24_inplace per call %s overall time %s for %s"
       % (round(float(t)/float(N), 10), round(float(t), 5), N))
 
 
-t = timeit.timeit("bloom_effect_array32_inplace(background, 128, fast_=False)",
-                  "from __main__ import bloom_effect_array32_inplace, background", number=N)
-print("\nPerformance testing bloom_effect_array32_inplace per call %s overall time %s for %s"
+t = timeit.timeit("bloom_effect32_inplace(background, 128, fast_=False)",
+                  "from __main__ import bloom_effect32_inplace, background", number=N)
+print("\nPerformance testing bloom_effect32_inplace per call %s overall time %s for %s"
       % (round(float(t)/float(N), 10), round(float(t), 5), N))
 
-t = timeit.timeit("bloom_effect_array32_inplace(background, 128, fast_=True)",
-                  "from __main__ import bloom_effect_array32_inplace, background", number=N)
-print("\nPerformance testing bloom_effect_array32_inplace per call %s overall time %s for %s"
+t = timeit.timeit("bloom_effect32_inplace(background, 128, fast_=True)",
+                  "from __main__ import bloom_effect32_inplace, background", number=N)
+print("\nPerformance testing bloom_effect32_inplace per call %s overall time %s for %s"
       % (round(float(t)/float(N), 10), round(float(t), 5), N))
 
 # ------------------ OTHER FUNCTIONS

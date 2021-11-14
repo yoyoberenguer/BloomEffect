@@ -1,5 +1,8 @@
 # BloomEffect 
 
+Bloom artefact  
+
+![alt text](https://raw.githubusercontent.com/yoyoberenguer/BloomEffect/version-1.0.0/Assets/bloom_bpf_values.png)
 
 This library contains Gaussian blur kernel 5x5 algoritms, bright pass filters and bloom 
 methods designed to work with Pygame and python.
@@ -27,7 +30,9 @@ the multi-processing on/off.
 
 The bloom effect can also be used for different applications such 
 as : image processing, 2D light effect, spritesheet, demos and 
-text enhemcement, neon effect etc 
+text enhancement, neon effect etc 
+
+![alt text](https://raw.githubusercontent.com/yoyoberenguer/BloomEffect/version-1.0.0/Assets/text_bloom.png)
 
 The project is under the ```MIT license```
 
@@ -44,14 +49,21 @@ REF https://en.wikipedia.org/wiki/Bloom_(shader_effect)
 
 * left image with bloom effect 
 
-![alt text](https://github.com/yoyoberenguer/BloomEffect/blob/version-1.0.0/Capture.PNG)
 
-![alt text](https://github.com/yoyoberenguer/BloomEffect/blob/version-1.0.0/Capture1.PNG)
+![alt text](https://raw.githubusercontent.com/yoyoberenguer/BloomEffect/version-1.0.0/Assets/i2_bloom.png)
+
+![alt text](https://raw.githubusercontent.com/yoyoberenguer/BloomEffect/version-1.0.0/Assets/i3_bloom.png)
+
 
 
 ## Installation 
 ```
 pip install BloomEffect
+```
+
+* version
+```python
+from BloomEffect import __version__
 ```
 
 ## Bloom method
@@ -79,8 +91,7 @@ Acronyme : bpf (bright pass filter)
    with the special flag BLEND_RGB_ADD (additive blend mode effect).
 ```
 
-![alt text](https://github.com/yoyoberenguer/BloomEffect/blob/master/BLOOM.png)
-
+![alt text](https://raw.githubusercontent.com/yoyoberenguer/BloomEffect/version-1.0.0/BLOOM.png)
 
 ## Blur method details
 ```cython
@@ -93,12 +104,48 @@ blur5x5_array32_inplace(rgba_array_, mask=None)
 
 ## Bloom method details
 ```cython
-bloom_effect_array24(surface_, threshold_, smooth_ = 1, mask_ = None, fast_ = False)
-bloom_effect_array32(surface_, threshold_, smooth_ = 1, mask_ = None, fast_ = False)
+bloom_effect24(surface_, threshold_, smooth_ = 1, mask_ = None, fast_ = False)
+bloom_effect32(surface_, threshold_, smooth_ = 1, mask_ = None, fast_ = False)
 
-bloom_effect_array24_inplace(surface_, threshold_, fast_ = False)
-bloom_effect_array32_inplace(surface_, threshold_, fast_ = False)
+bloom_effect24_inplace(surface_, threshold_, fast_ = False)
+bloom_effect32_inplace(surface_, threshold_, fast_ = False)
 ```
+
+## Quick example
+
+```python
+
+from bloom import *
+import time
+
+width, height = 512 + 128, 128
+screen = pygame.display.set_mode((width, height))
+pygame.display.set_caption("Bloom effect")
+
+image = pygame.image.load('Assets/Aliens.jpg').convert()
+image = pygame.transform.smoothscale(image, (128, 128))
+
+bloom_image_128 = bloom_effect24(image, 128)
+bloom_image_100 = bloom_effect24(image, 100)
+bloom_image_80 = bloom_effect24(image, 80)
+bloom_image_20 = bloom_effect24(image, 20)
+
+timer = time.time()
+while 1:
+    pygame.event.pump()
+
+    screen.blit(image, (0, 0))
+    screen.blit(bloom_image_128, (128, 0))
+    screen.blit(bloom_image_100, (256, 0))
+    screen.blit(bloom_image_80, (384, 0))
+    screen.blit(bloom_image_20, (512, 0))
+    if time.time() - timer > 5:
+        break
+
+    pygame.display.flip()
+
+```
+
 
 #### - Smooth factor
 
@@ -113,7 +160,8 @@ The smooth effect (right image) produce a less intense bloom effect on the plane
 and on the first moon (light refraction). With blur>1 the image looks more sharp and the 
 light source appear to be more evenly spread 
 
-![alt text](https://github.com/yoyoberenguer/BloomEffect/blob/version-1.0.0/image3.png)
+![alt text](https://raw.githubusercontent.com/yoyoberenguer/BloomEffect/version-1.0.0/bloom_smooth_values.png)
+
 
 #### - Fast flag
 
@@ -193,7 +241,7 @@ If you have any compilation error refer to the section ```Building cython code``
 
 ## Importing cython code from a cython pyx file
 ``` python
-from bloom cimport bloom_effect_array24_c, bloom_effect_array32_c, 
+from BloomEffect cimport bloom_effect_array24_c, bloom_effect_array32_c, 
     bloom_effect_array24_inplace_c, bloom_effect_array32_inplace_c
 ```
 
