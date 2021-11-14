@@ -32,8 +32,6 @@ The bloom effect can also be used for different applications such
 as : image processing, 2D light effect, spritesheet, demos and 
 ```text enhancement```, neon effect etc 
 
-![alt text](https://raw.githubusercontent.com/yoyoberenguer/BloomEffect/version-1.0.1/Assets/text_bloom.png)
-
 The project is under the ```MIT license```
 
 ### Bloom effect definition (from wikipedia) :
