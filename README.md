@@ -13,7 +13,7 @@ pygame image format compatibility for more information.
 These algorithms can be used offline or in real time processing for 
 Indy Game such as pygame or Arcade game as long as the game resolution 
 do not exceed 1280x1024. A modern CPU with at least 8 
-logical processors is require to keep the game running between 30-60 fps.
+logical processor is required to keep the game running between 30-60 fps.
 
 For minimum hardware specifications, the library can be used for 
 post-processing (surface transformation such as blur and bloom effect)
@@ -31,6 +31,7 @@ the multi-processing on/off.
 The bloom effect can also be used for different applications such 
 as : image processing, 2D light effect, spritesheet, demos and 
 ```text enhancement```, neon effect etc 
+
 
 The project is under the ```MIT license```
 
@@ -55,16 +56,21 @@ REF https://en.wikipedia.org/wiki/Bloom_(shader_effect)
 
 
 ## Installation 
+check the link for newest version https://pypi.org/project/BloomEffect/
 ```
-pip install BloomEffect
+pip install BloomEffect 
+# or version 1.0.2  
+pip install BloomEffect==1.0.2
 ```
 
-* version
+* version installed 
+* Imported module is case sensitive 
 ```python
-from BloomEffect import __version__
+>>>from BloomEffect.bloom import __version__
+>>>__version__
 ```
 
-## Bloom method
+## Bloom technique
 ```
 Acronyme : bpf (bright pass filter)
 
@@ -92,6 +98,8 @@ Acronyme : bpf (bright pass filter)
 ![alt text](https://raw.githubusercontent.com/yoyoberenguer/BloomEffect/version-1.0.1/BLOOM.png)
 
 ## Blur method details
+* The mask is set be default to None (this feature is not available yet) for 
+  the blur algorithms
 ```cython
 blur5x5_array24(rgb_array_,  mask=None)
 blur5x5_array32(rgba_array_, mask=None)
@@ -101,6 +109,7 @@ blur5x5_array32_inplace(rgba_array_, mask=None)
 ```
 
 ## Bloom method details
+* The mask argument is working for bloom_effect24, bloom_effect32
 ```cython
 bloom_effect24(surface_, threshold_, smooth_ = 1, mask_ = None, fast_ = False)
 bloom_effect32(surface_, threshold_, smooth_ = 1, mask_ = None, fast_ = False)
@@ -112,15 +121,15 @@ bloom_effect32_inplace(surface_, threshold_, fast_ = False)
 ## Quick example
 
 ```python
-
-from bloom import *
+import pygame
+from BloomEffect.bloom import *
 import time
 
 width, height = 512 + 128, 128
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Bloom effect")
 
-image = pygame.image.load('Assets/Aliens.jpg').convert()
+image = pygame.image.load('BloomEffect/Assets/Aliens.jpg').convert()
 image = pygame.transform.smoothscale(image, (128, 128))
 
 bloom_image_128 = bloom_effect24(image, 128)
@@ -130,17 +139,17 @@ bloom_image_20 = bloom_effect24(image, 20)
 
 timer = time.time()
 while 1:
-    pygame.event.pump()
+  pygame.event.pump()
 
-    screen.blit(image, (0, 0))
-    screen.blit(bloom_image_128, (128, 0))
-    screen.blit(bloom_image_100, (256, 0))
-    screen.blit(bloom_image_80, (384, 0))
-    screen.blit(bloom_image_20, (512, 0))
-    if time.time() - timer > 5:
-        break
+  screen.blit(image, (0, 0))
+  screen.blit(bloom_image_128, (128, 0))
+  screen.blit(bloom_image_100, (256, 0))
+  screen.blit(bloom_image_80, (384, 0))
+  screen.blit(bloom_image_20, (512, 0))
+  if time.time() - timer > 5:
+    break
 
-    pygame.display.flip()
+  pygame.display.flip()
 
 ```
 
@@ -214,12 +223,9 @@ To override the OPENMP feature and disable the multi-processing remove the flag 
 ```setup_bloom.py```
 ```python
 
-ext_modules = cythonize(Extension(
-            'bloom', ['bloom.pyx'], extra_compile_args=[
-        "/openmp", "/Qpar", "/fp:fast", "/O2", "/Oy", "/Ot"], language="c",
-        define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")]
-        )
-    )
+ext_modules=cythonize([
+        Extension("bloom", ["BloomEffect/bloom.pyx"],
+                  extra_compile_args=["/openmp", "/Qpar", "/fp:fast", "/O2", "/Oy", "/Ot"], language="c")]),
 ```
 Save the change and build the cython code with the following instruction:
 
@@ -234,22 +240,16 @@ If you have any compilation error refer to the section ```Building cython code``
 - Pygame version >3
 - numpy >= 1.18
 - cython >=0.29.21 (C extension for python) 
-- A C compiler for windows (Visual Studio, MinGW etc) 
-
-
-## Importing cython code from a cython pyx file
-``` python
-from BloomEffect cimport bloom_effect_array24_c, bloom_effect_array32_c, 
-    bloom_effect_array24_inplace_c, bloom_effect_array32_inplace_c
-```
+- A C compiler for windows (Visual Studio, MinGW etc)
 
 ## Credit
 Yoann Berenguer 
 
 ## Dependencies :
 ```
-python >= 3.0
-cython >= 0.28
+numpy >= 1.18
+pygame >=2.0.0
+cython >=0.29.21
 ```
 
 ## License :
@@ -282,17 +282,15 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 ## Testing: 
 ```python
-import BloomEffect
-from BloomEffect.tests.test_bloom import run_testsuite
-
-run_testsuite()
-
+>>> import BloomEffect
+>>> from BloomEffect import *
+>>> run_testsuite()
 ```
 
 ## Timing :
 In the directory tests under the main project path
 
-C:...\>tests\python profiling.py
+C:...tests\python profiling.py
 ```
 TESTING WITH IMAGE 1280x1024
 
