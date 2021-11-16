@@ -1,18 +1,10 @@
-include __init__.pxd
-include __init__.py
 include pyproject.toml
-include bloom.pxd
-include bloom.pyx
-include bloom.c
-include example.py
 include LICENSE
 include MANIFEST.in
 include pyproject.toml
 include README.md
 include requirements.txt
-include setup_bloom.py
-graft tests
-graft Assets
+graft BloomEffect
 
 
 
