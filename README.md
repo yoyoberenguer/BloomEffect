@@ -4,6 +4,10 @@ Bloom artefact
 
 ![alt text](https://raw.githubusercontent.com/yoyoberenguer/BloomEffect/version-1.0.1/Assets/bloom_bpf_values.png)
 
+* real time
+
+![alt text](https://github.com/yoyoberenguer/BloomEffect/blob/37b77f1b3f6d2977ba74e9504c9811cda6f24159/Assets/SunBloomEffect.gif)
+
 This library contains Gaussian blur kernel 5x5 algoritms, bright pass filters and bloom 
 methods designed to work with ```Pygame``` and ```python```.
 
