@@ -12,7 +12,7 @@ This library contains Gaussian blur kernel 5x5 algoritms, bright pass filters an
 methods designed to work with ```Pygame``` and ```python```.
 
 It provides fast algorithms to create ```2D bloom effect``` 
-for pygame.Surface (SDL suface) or images (PNG, JPG etc), see 
+for pygame.Surface (SDL surface) or images (PNG, JPG etc), see 
 pygame image format compatibility for more information.
 These algorithms can be used offline or in real time processing for 
 Indy Game such as pygame or Arcade game as long as the game resolution 
