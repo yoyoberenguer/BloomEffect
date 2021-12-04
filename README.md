@@ -1,4 +1,4 @@
-# BloomEffect 
+# BloomEffect for image processing or 2D video game 
 
 Bloom artefact  
 
