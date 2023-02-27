@@ -8,9 +8,7 @@ Bloom artefact
 
 ![alt text](https://github.com/yoyoberenguer/BloomEffect/blob/37b77f1b3f6d2977ba74e9504c9811cda6f24159/Assets/SunBloomEffect.gif)
 
-* Real time flame shader effect with bloom algorithm incorporated 
-
-![alt text](Assets/FireEffect.gif)
+![alt text](Assets/bloom.gif)
 
 This library contains Gaussian blur kernel 5x5 algoritms, bright pass filters and bloom 
 methods designed to work with ```Pygame``` and ```python```.
