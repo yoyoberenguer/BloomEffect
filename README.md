@@ -78,27 +78,30 @@ pip install BloomEffect==1.0.2
 
 ## Bloom technique
 ```
-Acronyme : bpf (bright pass filter)
+Acronym: BPF (Bright Pass Filter)
 
-1) First we apply a bright pass filter to the pygame surface(SDL surface) using one 
-   of the following method:
-   bpf24_c for 24-32bit surface with or without alpha transparency channel or 
-   bpf32_c compatible with 32-bit image format containing alpha transparency (per-pixel alpha) 
-   These two methods have a threshold argument that can be adjust in order to filter bright 
-   pixels and control the overall image luminence. 
-   
-2) The bpf image is then downscale into sub-surface x2, x4, x8, x16 using 
-   pygame transform.scale method. No need to use smoothscale (bilinear filtering method).
-  
-3) A Gaussian blur 5x5 filter is apply on each of the downsized bpf images (the variable smmooth 
-   define the number of passes). 
-  
-4) The blurred sub-surface images are up-scale using a bilinear filtering method (pygame 
-   smoothscale method. Note : Using an un-filtered rescaling method will pixelate the final
-   output image. 
-  
-5) To create the final bloom effect, all the sub-surfaces are blit to the original surface 
-   with the special flag BLEND_RGB_ADD (additive blend mode effect).
+1. Bright Pass Filtering
+    First, a Bright Pass Filter is applied to the Pygame surface (SDL surface) using one of the following methods:
+    . bpf24_c: For 24- or 32-bit surfaces, with or without an alpha transparency channel.
+    . bpf32_c: Specifically for 32-bit images with per-pixel alpha transparency.
+    Both functions include a threshold parameter that determines which pixels are considered "bright." This allows control over the image's luminance and which areas will be affected by the bloom.
+
+2. Downscaling
+    The filtered (BPF) image is downscaled to multiple lower resolutions: ×2, ×4, ×8, and ×16.
+    This is done using pygame.transform.scale().
+    Note: smoothscale() (bilinear filtering) is not necessary during downscaling.
+
+3. Gaussian Blur
+    A 5×5 Gaussian blur is applied to each of the downscaled images.
+    The number of blur passes is controlled by the smmooth variable. More passes produce a softer, more pronounced glow.
+
+4. Upscaling with Filtering
+    Each blurred sub-surface is then upscaled back to the original resolution using pygame.transform.smoothscale() for bilinear filtering.
+    Note: Using non-filtered scaling (e.g., scale() instead of smoothscale()) may result in a pixelated final image.
+
+5. Combining for Bloom Effect
+    Finally, all the blurred sub-surfaces are blended back onto the original surface using the BLEND_RGB_ADD flag, which applies additive blending.
+    This step creates the characteristic glow of the bloom effect by intensifying bright areas.
 ```
 
 ![alt text](https://raw.githubusercontent.com/yoyoberenguer/BloomEffect/version-1.0.1/BLOOM.png)
@@ -162,16 +165,13 @@ while 1:
 
 #### - Smooth factor
 
-The ```smooth``` option allows to create realistic bloom effect by smoothing the sub-surface 
-with a define number of blur passes. 
-With multiple blur passes, the light source will spread evenly accross the image without 
-altering the image quality. 
+The `smooth` option controls the number of blur passes applied during the bloom effect, allowing for a more natural and realistic light spread. Increasing the number of blur passes softens the glow around bright areas, making the light source appear more evenly distributed across the image without degrading visual quality.
 
-* Left image with smooth = 1 and right with smooth 5, 8, 10
+Example:
+The left image shows smooth = 1, while the right images show increasing values: smooth = 5, 8, and 10.
 
-The smooth effect (right image) produce a less intense bloom effect on the planet surface 
-and on the first moon (light refraction). With blur>1 the image looks more sharp and the 
-light source appear to be more evenly spread 
+As seen on the right, higher smooth values produce a more subtle and refined bloom effect—particularly noticeable on the planet’s surface and the first moon. This soft blur (light refraction) reduces harsh brightness, resulting in a more even glow.
+With smooth > 1, the image appears sharper and the light spreads more naturally, enhancing the overall realism.
 
 ![alt text](https://raw.githubusercontent.com/yoyoberenguer/BloomEffect/version-1.0.1/Assets/bloom_smooth_values.png)
 
